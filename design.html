@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jonmircha — Sistema de Diseño</title>
+<meta name="description" content="Página de referencia visual del sistema de diseño jonmircha: colores, tipografía, espaciado, formas, elevación y componentes.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<style>
+/* ============ TOKENS (fieles a DESIGN.md) ============ */
+:root{
+  --color-primary:#C7431F;
+  --color-primary-alt:#E7562E;
+  --color-primary-variant:#E7762E;
+  --color-primary-hover:#A93A14;
+  --color-primary-pressed:#9C3612;
+  --color-link:#0088CC;
+  --color-ink:#202225;
+  --color-muted:#808080;
+  --color-surface:#FCFCFC;
+  --color-surface-muted:#EEEEEE;
+  --color-disabled:#CCCCCC;
+  --color-white:#FFFFFF;
+  --shadow-subtle:0 2px 4px rgba(32,34,37,.08);
+  --shadow-medium:0 4px 12px rgba(32,34,37,.12);
+  --shadow-high:0 8px 24px rgba(32,34,37,.16);
+  --veil:rgba(0,0,0,.5);
+  --font-body:"PT Sans","Segoe UI",Arial,sans-serif;
+  --font-display:"Raleway Black","Raleway","Segoe UI",Arial,sans-serif;
+  --font-accent:"Raleway","Segoe UI",Arial,sans-serif;
+  --font-mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --space-micro:4px; --space-xs:8px; --space-sm:12px; --space-md:16px;
+  --space-lg:24px; --space-xl:32px; --space-2xl:40px; --space-3xl:48px;
+  --space-4xl:92px; --space-5xl:136px;
+  --radius-none:0px; --radius-sm:8px; --radius-md:16px;
+  --radius-pill:50px; --radius-full:9999px;
+  --max-width:1440px;
+}
+/* ============ FUENTES LOCALES ============ */
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-bold-italic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway Black";src:url("assets/fonts/raleway-black.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+/* Raleway 900 como parte de la familia Raleway para font-weight:900 */
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-black.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto Mono";src:url("assets/fonts/roboto-mono-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-surface);color:var(--color-ink);
+  font-family:var(--font-body);font-size:20px;line-height:30px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{line-height:1.2;margin:0 0 var(--space-md)}
+p{margin:0 0 var(--space-md)}
+a{color:var(--color-link)}
+a:hover{color:var(--color-primary);text-decoration:underline}
+:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px;border-radius:2px}
+.skip-link{position:absolute;left:var(--space-md);top:-100px;z-index:200;background:var(--color-ink);color:var(--color-white);padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);text-decoration:none;transition:top .2s}
+.skip-link:focus{top:var(--space-sm)}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-3xl)}
+@media(max-width:1023px){.wrap{padding:0 var(--space-3xl)}body{font-size:18px}}
+@media(max-width:599px){.wrap{padding:0 var(--space-sm)}}
+/* ============ NAVBAR (token: navbar 64px, transparente) ============ */
+.site-nav{background:transparent;border-bottom:1px solid var(--color-surface-muted);min-height:64px;position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--color-surface) 92%,transparent)}
+.site-nav .wrap{display:flex;align-items:center;gap:var(--space-lg);min-height:64px}
+.brand{display:flex;align-items:center;gap:var(--space-sm);text-decoration:none;color:var(--color-ink);font-family:var(--font-accent);font-weight:700;font-size:20px}
+.brand img{width:32px;height:32px;display:block}
+.nav-links{display:flex;gap:var(--space-lg);list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{font-family:var(--font-body);font-size:20px;color:var(--color-ink);text-decoration:none;padding:var(--space-xs) 2px}
+.nav-links a:hover{color:var(--color-primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.nav-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.nav-toggle{display:none;margin-left:auto;background:var(--color-surface-muted);border:0;border-radius:var(--radius-full);width:44px;height:44px;font-size:22px;cursor:pointer;color:var(--color-ink)}
+@media(max-width:899px){
+  .nav-toggle{display:block}
+  .nav-links{display:none;flex-direction:column;gap:0;background:var(--color-white);border:1px solid var(--color-surface-muted);position:absolute;top:64px;right:var(--space-sm);left:var(--space-sm);padding:var(--space-sm)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:var(--space-sm) var(--space-md)}
+}
+/* ============ HERO (token: 48px horiz / 92px vert) ============ */
+.hero{background:var(--color-surface);padding:var(--space-4xl) 0;text-align:left;border-bottom:1px solid var(--color-surface-muted)}
+.hero .wrap{padding-top:0;padding-bottom:0}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px;margin-bottom:var(--space-md)}
+.hero h1 .accent{color:var(--color-primary)}
+.hero p.lead{font-size:20px;max-width:60ch}
+.hero .logo-strip{display:flex;align-items:center;gap:var(--space-md);margin-top:var(--space-lg)}
+.hero .logo-strip img{width:64px;height:64px}
+.grad-text{background:linear-gradient(135deg,var(--color-primary-alt),var(--color-primary-variant));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ============ SECCIONES ============ */
+section.block{padding:var(--space-4xl) 0;border-bottom:1px solid var(--color-surface-muted)}
+@media(max-width:1023px){section.block{padding:var(--space-3xl) 0}}
+@media(max-width:599px){section.block{padding:var(--space-lg) 0}}
+.kicker{font-family:var(--font-mono);font-size:14px;line-height:20px;color:var(--color-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)}
+.block h2{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px}
+.block h3{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px;text-transform:uppercase;letter-spacing:.06em;color:var(--color-ink);margin-top:var(--space-xl)}
+.note{font-family:var(--font-accent);font-size:16px;line-height:24px;color:var(--color-ink);background:var(--color-white);border:1px solid var(--color-surface-muted);border-left:4px solid var(--color-primary);padding:var(--space-sm) var(--space-md);max-width:80ch}
+/* ============ COLORES ============ */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-md);margin-top:var(--space-lg)}
+.swatch{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);overflow:hidden;text-align:left;cursor:pointer;font:inherit;color:inherit;padding:0;display:block;width:100%}
+.swatch:hover{box-shadow:var(--shadow-subtle)}
+.swatch .chip-color{display:block;height:92px}
+.swatch .meta{padding:var(--space-sm) var(--space-md)}
+.swatch .meta strong{display:block;font-family:var(--font-accent);font-size:16px}
+.swatch .meta code{font-family:var(--font-mono);font-size:14px}
+.swatch .meta small{display:block;font-family:var(--font-accent);font-size:16px;line-height:24px;margin-top:4px}
+.swatch .copy-hint{font-family:var(--font-mono);font-size:12px;color:var(--color-muted)}
+/* ============ TIPOGRAFÍA ============ */
+.type-row{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-md) var(--space-lg);margin-bottom:var(--space-md);overflow-wrap:break-word}
+.type-row .tag{font-family:var(--font-mono);font-size:14px;color:var(--color-white);background:var(--color-ink);display:inline-block;padding:2px 10px;margin-bottom:var(--space-sm)}
+.spec-display{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px}
+.spec-h1{font-family:var(--font-body);font-weight:700;font-size:40px;line-height:48px}
+.spec-h2{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px}
+.spec-h3{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px}
+.spec-body{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:30px}
+.spec-list{font-family:var(--font-accent);font-weight:400;font-size:20px;line-height:30px}
+.spec-small{font-family:var(--font-accent);font-weight:400;font-size:16px;line-height:24px}
+.spec-button{font-family:var(--font-accent);font-weight:700;font-size:19.216px;line-height:24px}
+.spec-link{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:30px}
+.spec-label{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px}
+.spec-mono{font-family:var(--font-mono);font-weight:400;font-size:14px;line-height:20px}
+.spec-chip{font-family:var(--font-accent);font-weight:400;font-size:13px;line-height:16px}
+.type-meta{font-family:var(--font-mono);font-size:14px;color:#4a4e54;margin-top:var(--space-sm)}
+/* ============ ESPACIADO / RETÍCULA ============ */
+.scale{display:flex;align-items:flex-end;gap:var(--space-sm);flex-wrap:wrap;margin:var(--space-md) 0}
+.scale div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.scale .bar{background:var(--color-primary);width:48px}
+.scale small{font-family:var(--font-mono);font-size:12px}
+.grid-demo{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--space-lg);margin-top:var(--space-md)}
+.grid-demo span{background:var(--color-surface-muted);border:1px dashed var(--color-muted);min-height:48px;display:block}
+@media(max-width:1023px){.grid-demo{grid-template-columns:repeat(8,1fr)}}
+@media(max-width:599px){.grid-demo{grid-template-columns:1fr}}
+.bp-table{width:100%;border-collapse:collapse;background:var(--color-white);font-size:18px;margin-top:var(--space-md)}
+.bp-table th,.bp-table td{border:1px solid var(--color-surface-muted);padding:var(--space-sm) var(--space-md);text-align:left}
+.bp-table th{font-family:var(--font-body);font-size:16px}
+/* ============ ELEVACIÓN ============ */
+.elev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-lg);margin-top:var(--space-lg)}
+.elev{background:var(--color-white);border:1px solid var(--color-surface-muted);padding:var(--space-lg);text-align:center}
+.elev.plano{box-shadow:none}
+.elev.sutil{box-shadow:var(--shadow-subtle)}
+.elev.media{box-shadow:var(--shadow-medium)}
+.elev.alta{box-shadow:var(--shadow-high)}
+.elev code{font-family:var(--font-mono);font-size:14px;display:block;margin-top:var(--space-sm)}
+/* ============ FORMAS ============ */
+.shape-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-md);margin-top:var(--space-lg)}
+.shape{background:var(--color-primary);color:var(--color-white);min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:var(--font-mono);font-size:14px}
+.shape.light{background:var(--color-surface-muted);color:var(--color-ink)}
+.shape.r-none{border-radius:var(--radius-none)}
+.shape.r-sm{border-radius:var(--radius-sm)}
+.shape.r-md{border-radius:var(--radius-md)}
+.shape.r-pill{border-radius:var(--radius-pill);min-height:64px}
+.shape.r-full{border-radius:var(--radius-full);width:110px;height:110px;min-height:0;margin:0 auto}
+/* ============ COMPONENTES ============ */
+.demo-panel{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-lg);margin-bottom:var(--space-lg)}
+.demo-panel h3:first-child{margin-top:0}
+/* Botones */
+.btn-row{display:flex;gap:var(--space-md);flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--color-primary);color:var(--color-white);font-family:var(--font-accent);font-weight:700;font-size:19.216px;line-height:24px;border-radius:var(--radius-pill);padding:12px 24px;border:0;cursor:pointer;min-height:44px;transition:background .15s,transform .1s}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-primary:active{background:var(--color-primary-pressed);transform:scale(.97)}
+.btn-primary:disabled{background:var(--color-disabled);color:var(--color-muted);cursor:not-allowed;transform:none}
+.btn-icon{background:var(--color-surface-muted);color:var(--color-primary);border:0;border-radius:var(--radius-full);width:44px;height:44px;min-width:44px;cursor:pointer;font-size:20px;display:inline-flex;align-items:center;justify-content:center}
+.btn-icon:hover{background:var(--color-primary);color:var(--color-white)}
+.btn-ghost{background:transparent;border:0;color:var(--color-link);font-family:var(--font-body);font-size:20px;cursor:pointer;padding:12px 8px;min-height:44px}
+.btn-ghost:hover{color:var(--color-primary);text-decoration:underline}
+/* Enlaces */
+.link-menu{font-family:var(--font-body);font-size:20px;color:var(--color-ink);text-decoration:none}
+.link-menu:hover{color:var(--color-primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.link-menu.active{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.link-inline{color:var(--color-link);text-decoration:none}
+.link-inline:hover{color:var(--color-primary);text-decoration:underline}
+.link-title{font-family:var(--font-display);color:var(--color-primary);text-decoration:none}
+.link-title:hover{opacity:.8}
+/* Campos */
+.field{margin-bottom:var(--space-md);max-width:560px}
+.field label{display:block;font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px;margin-bottom:6px}
+.field input[type=text],.field input[type=email]{width:100%;background:var(--color-white);color:var(--color-ink);font-family:var(--font-body);font-size:20px;padding:12px 16px;border:2px solid var(--color-surface-muted);border-radius:var(--radius-none);min-height:40px}
+.field input::placeholder{color:var(--color-muted)}
+.field input:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 4px color-mix(in srgb,var(--color-primary) 20%,transparent)}
+/* Tarjetas */
+.card{background:var(--color-surface);color:var(--color-ink);font-family:var(--font-body);font-size:20px;border-radius:var(--radius-none);padding:var(--space-sm) var(--space-md);border:1px solid transparent;max-width:640px}
+.card:hover{box-shadow:var(--shadow-subtle)}
+.course-card{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-lg);max-width:340px;text-align:left}
+.course-card:hover{border-color:var(--color-primary);box-shadow:var(--shadow-subtle)}
+.course-card .cc-icon{font-size:32px}
+.course-card h4{font-family:var(--font-accent);font-weight:700;font-size:19px;margin:var(--space-sm) 0}
+.skill-card{background:var(--color-white);border:1px solid var(--color-surface-muted);padding:var(--space-sm) var(--space-md);display:flex;gap:var(--space-sm);align-items:center;max-width:420px}
+.skill-card .dot{color:var(--color-primary);font-weight:700}
+.edu-card{background:var(--color-white);border:1px solid var(--color-surface-muted);border-left:4px solid var(--color-primary);border-radius:var(--radius-none);padding:var(--space-md) var(--space-lg);max-width:680px}
+.edu-card .edu-top{display:flex;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;font-weight:700}
+.edu-card time{font-family:var(--font-mono);font-size:14px;color:var(--color-muted);font-weight:400}
+.contact-btn{display:inline-flex;align-items:center;gap:var(--space-sm);background:var(--color-white);color:var(--color-ink);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-sm) var(--space-md);text-decoration:none;font-size:18px;min-height:44px}
+.contact-btn .ci{color:var(--color-primary)}
+.contact-btn:hover{border-color:var(--color-primary);color:var(--color-primary)}
+/* Sociales, chips, avatar */
+.social-row{display:flex;gap:var(--space-sm)}
+.social-btn{background:var(--color-surface-muted);color:var(--color-ink);border:0;border-radius:var(--radius-full);width:44px;height:44px;cursor:pointer;font-size:18px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.social-btn:hover{background:var(--color-primary);color:var(--color-white)}
+.chip{display:inline-block;background:var(--color-surface-muted);color:var(--color-ink);font-family:var(--font-accent);font-size:13px;line-height:16px;border-radius:var(--radius-full);padding:6px 14px;margin:0 6px 6px 0}
+.avatar{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-full);border:4px solid var(--color-surface-muted);display:block}
+@media(max-width:599px){.avatar{width:160px;height:160px}}
+.avatar-row{display:flex;gap:var(--space-xl);align-items:center;flex-wrap:wrap}
+/* Modal */
+.modal-veil{display:none;position:fixed;inset:0;background:var(--veil);z-index:300;align-items:center;justify-content:center;padding:var(--space-md)}
+.modal-veil.open{display:flex}
+.modal{background:var(--color-white);box-shadow:var(--shadow-medium);padding:var(--space-xl);max-width:480px;width:100%}
+/* Do / Don't */
+.do-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);margin-top:var(--space-lg)}
+@media(max-width:899px){.do-grid{grid-template-columns:1fr}}
+.do-card{border:1px solid var(--color-surface-muted);background:var(--color-white);padding:var(--space-md) var(--space-lg)}
+.do-card.do{border-top:6px solid #2e7d32}
+.do-card.dont{border-top:6px solid var(--color-primary)}
+.do-card ul{margin:0;padding-left:var(--space-lg)}
+.do-card li{margin-bottom:var(--space-sm);font-size:18px}
+footer.site-footer{padding:var(--space-3xl) 0 var(--space-xl);font-family:var(--font-accent);font-size:16px}
+footer.site-footer .wrap{display:flex;gap:var(--space-md);flex-wrap:wrap;align-items:center;justify-content:space-between}
+.toast{position:fixed;bottom:var(--space-lg);left:50%;transform:translateX(-50%) translateY(20px);background:var(--color-ink);color:var(--color-white);padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-sm);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:400;font-size:16px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<nav class="site-nav" aria-label="Navegación principal">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="jonmircha — inicio">
+      <img src="assets/img/isotipo.svg" alt="Isotipo del búho jonmircha" width="32" height="32">
+      <span>jonmircha <span class="sr-only">— sistema de diseño</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#colores">Colores</a></li>
+      <li><a href="#tipografia">Tipografía</a></li>
+      <li><a href="#espaciado">Espaciado</a></li>
+      <li><a href="#formas">Formas</a></li>
+      <li><a href="#componentes">Componentes</a></li>
+      <li><a href="#reglas">Reglas</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="kicker">DESIGN.md · v alpha · referencia visual</p>
+    <h1>Sistema de diseño <span class="accent">jonmircha</span><br><span class="grad-text">Moderno, enérgico y docente.</span></h1>
+    <p class="lead">Acento audaz sin abrumar: naranja accesible sobre fondos casi blancos, alto contraste y componentes sin ornamentación. Esta página aplica fielmente los tokens del <code>DESIGN.md</code>.</p>
+    <div class="btn-row" style="margin-top:24px">
+      <button class="btn-primary" type="button">Comenzar ahora</button>
+      <button class="btn-ghost" type="button">Ver documentación</button>
+    </div>
+    <div class="logo-strip">
+      <img src="assets/img/isotipo.svg" alt="Logo del búho con degradado naranja de marca" width="64" height="64">
+      <span class="spec-mono">logo · degradado {colors.primary-alt} → {colors.primary-variant}</span>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="block" id="resumen" aria-labelledby="t-resumen">
+    <p class="kicker">01 · Overview</p>
+    <h2 id="t-resumen">Personalidad de marca</h2>
+    <p style="max-width:70ch">Puente entre la experiencia técnica y la calidez cercana. Filosofía minimalista para creadores y desarrolladores: layouts limpios, mucho espacio en blanco y jerarquía lograda con tamaño, peso y color — nunca con opacidad.</p>
+    <div class="note"><strong>Regla de combinación:</strong> el naranja con blancos y gris claro para máximo contraste. Nunca naranja y azul juntos en el mismo interactivo: se elige uno.</div>
+  </section>
+
+  <!-- COLORES -->
+  <section class="block" id="colores" aria-labelledby="t-colores">
+    <p class="kicker">02 · Colors</p>
+    <h2 id="t-colores">Paleta y rol de cada color</h2>
+    <p style="max-width:70ch">Pulsa cualquier muestra para copiar su hexadecimal.</p>
+    <div class="swatch-grid" id="swatches">
+      <button class="swatch" data-hex="#C7431F"><span class="chip-color" style="background:#C7431F"></span><span class="meta"><strong>Primary · Naranja accesible</strong><code>#C7431F</code><small>CTA primarios, acentos y texto en blanco. 4.94:1.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#E7562E"><span class="chip-color" style="background:#E7562E"></span><span class="meta"><strong>Primary-alt · Naranja de marca</strong><code>#E7562E</code><small>Uso alternativo y decorativo, titulares grandes. No texto pequeño en blanco.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#E7762E"><span class="chip-color" style="background:#E7762E"></span><span class="meta"><strong>Primary-variant · Naranja alterno</strong><code>#E7762E</code><small>Énfasis puntual, variante sutil.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#A93A14"><span class="chip-color" style="background:#A93A14"></span><span class="meta"><strong>Primary-hover</strong><code>#A93A14</code><small>Estado hover del botón primario.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#9C3612"><span class="chip-color" style="background:#9C3612"></span><span class="meta"><strong>Primary-pressed</strong><code>#9C3612</code><small>Estado pressed, tono más profundo.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#0088CC"><span class="chip-color" style="background:#0088CC"></span><span class="meta"><strong>Link · Azul cielo</strong><code>#0088CC</code><small>Enlaces e interactivos secundarios.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#202225"><span class="chip-color" style="background:#202225"></span><span class="meta"><strong>Ink · Negro casi puro</strong><code>#202225</code><small>Texto principal, máximo contraste.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#808080"><span class="chip-color" style="background:#808080"></span><span class="meta"><strong>Muted · Gris medio</strong><code>#808080</code><small>Terciario y deshabilitados. Mínimo para texto.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#FCFCFC"><span class="chip-color" style="background:#FCFCFC;border-bottom:1px solid #EEEEEE"></span><span class="meta"><strong>Surface · Fondo base</strong><code>#FCFCFC</code><small>Casi blanco, fondo por defecto.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#EEEEEE"><span class="chip-color" style="background:#EEEEEE"></span><span class="meta"><strong>Surface-muted</strong><code>#EEEEEE</code><small>Botones secundarios, bordes y chips.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#CCCCCC"><span class="chip-color" style="background:#CCCCCC"></span><span class="meta"><strong>Disabled</strong><code>#CCCCCC</code><small>Fondo de primario deshabilitado.</small><span class="copy-hint">clic para copiar</span></span></button>
+      <button class="swatch" data-hex="#FFFFFF"><span class="chip-color" style="background:#FFFFFF;border-bottom:1px solid #EEEEEE"></span><span class="meta"><strong>White</strong><code>#FFFFFF</code><small>Campos, tarjetas y máximo contraste.</small><span class="copy-hint">clic para copiar</span></span></button>
+    </div>
+  </section>
+
+  <!-- TIPOGRAFÍA -->
+  <section class="block" id="tipografia" aria-labelledby="t-tipo">
+    <p class="kicker">03 · Typography</p>
+    <h2 id="t-tipo">Escala tipográfica</h2>
+    <p style="max-width:70ch">PT Sans para cuerpo y navegación · Raleway para títulos, botones y énfasis · Raleway Black solo para titulares top · Roboto Mono para código. Servidas en local desde <code>assets/fonts</code>.</p>
+    <div class="type-row"><span class="tag">display</span><div class="spec-display">Diseña para enseñar 40/48</div><p class="type-meta">Raleway Black · 40px · 900 · 48px</p></div>
+    <div class="type-row"><span class="tag">h1</span><div class="spec-h1">Título de sección principal</div><p class="type-meta">PT Sans · 40px · 700 · 48px</p></div>
+    <div class="type-row"><span class="tag">h2</span><div class="spec-h2">Titular destacado Raleway</div><p class="type-meta">Raleway Black · 40px · 900 · 48px</p></div>
+    <div class="type-row"><span class="tag">h3</span><div class="spec-h3">Subsección · PT Sans bold 16px</div><p class="type-meta">PT Sans · 16px · 700 · 24px</p></div>
+    <div class="type-row"><span class="tag">body</span><div class="spec-body">El cuerpo del texto va en PT Sans a 20px con interlineado de 30px. Base 20px en escritorio, nunca bajo 16px.</div><p class="type-meta">PT Sans · 20px · 400 · 30px</p></div>
+    <div class="type-row"><span class="tag">list-item</span><div class="spec-list">— Ítem de lista en Raleway a 20px con acento naranja</div><p class="type-meta">Raleway · 20px · 400 · 30px</p></div>
+    <div class="type-row"><span class="tag">small</span><div class="spec-small">Texto pequeño en Raleway a 16px para notas y pies.</div><p class="type-meta">Raleway · 16px · 400 · 24px</p></div>
+    <div class="type-row"><span class="tag">button-label</span><div class="spec-button">Etiqueta de botón · Raleway 19.216px</div><p class="type-meta">Raleway · 19.216px · 700 · 24px</p></div>
+    <div class="type-row"><span class="tag">link</span><div class="spec-link"><a class="link-inline" href="#tipografia">Enlace en PT Sans a 20px, azul sin subrayado</a></div><p class="type-meta">PT Sans · 20px · 400 · 30px</p></div>
+    <div class="type-row"><span class="tag">label</span><div class="spec-label">Etiqueta de formulario · PT Sans 16px bold</div><p class="type-meta">PT Sans · 16px · 700 · 24px</p></div>
+    <div class="type-row"><span class="tag">mono</span><div class="spec-mono">2024 — presente · fecha monoespaciada · const curso = "JS";</div><p class="type-meta">Roboto Mono · 14px · 400 · 20px</p></div>
+    <div class="type-row"><span class="tag">chip</span><div><span class="chip spec-chip">JavaScript</span><span class="chip spec-chip">CSS</span><span class="chip spec-chip">HTML</span></div><p class="type-meta">Raleway · 13px · 400 · 16px</p></div>
+  </section>
+
+  <!-- ESPACIADO + LAYOUT -->
+  <section class="block" id="espaciado" aria-labelledby="t-space">
+    <p class="kicker">04 · Layout &amp; Spacing</p>
+    <h2 id="t-space">Espaciado y retícula</h2>
+    <p style="max-width:70ch">Unidad base 8px · ancho máximo 1440px · secciones separadas 48–92px.</p>
+    <h3>Escala (px)</h3>
+    <div class="scale" aria-hidden="true">
+      <div><span class="bar" style="height:4px"></span><small>4</small></div>
+      <div><span class="bar" style="height:8px"></span><small>8</small></div>
+      <div><span class="bar" style="height:12px"></span><small>12</small></div>
+      <div><span class="bar" style="height:16px"></span><small>16</small></div>
+      <div><span class="bar" style="height:24px"></span><small>24</small></div>
+      <div><span class="bar" style="height:32px"></span><small>32</small></div>
+      <div><span class="bar" style="height:40px"></span><small>40</small></div>
+      <div><span class="bar" style="height:48px"></span><small>48</small></div>
+      <div><span class="bar" style="height:92px"></span><small>92</small></div>
+      <div><span class="bar" style="height:136px"></span><small>136</small></div>
+    </div>
+    <p class="spec-mono">micro 4 · xs 8 · sm 12 · md 16 · lg 24 · xl 32 · 2xl 40 · 3xl 48 · 4xl 92 · 5xl 136</p>
+    <h3>Retícula de 12 columnas (8 en tableta, 1 en móvil)</h3>
+    <div class="grid-demo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <table class="bp-table">
+      <caption class="sr-only">Breakpoints del sistema</caption>
+      <thead><tr><th scope="col">Breakpoint</th><th scope="col">Columnas</th><th scope="col">Márgenes</th><th scope="col">Secciones</th></tr></thead>
+      <tbody>
+        <tr><td>Móvil 320–599px</td><td>1</td><td>12–16px</td><td>24px</td></tr>
+        <tr><td>Tableta 600–1023px</td><td>2–3 (retícula 8)</td><td>48px</td><td>48px</td></tr>
+        <tr><td>Escritorio 1024–1439px</td><td>3+</td><td>48–92px</td><td>92px</td></tr>
+        <tr><td>Amplio 1440px+</td><td>centrado 1440px</td><td>auto</td><td>92–136px</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ELEVACIÓN -->
+  <section class="block" id="elevacion" aria-labelledby="t-elev">
+    <p class="kicker">05 · Elevation &amp; Depth</p>
+    <h2 id="t-elev">Profundidad: plano primero</h2>
+    <p style="max-width:70ch">Diseño mayormente plano; sombras suaves solo con interacción o apilamiento. Nunca más profundas que <code>0 8px 24px</code>.</p>
+    <div class="elev-grid">
+      <div class="elev plano"><strong>Plano</strong><code>sin sombra · reposo</code></div>
+      <div class="elev sutil"><strong>Sutil</strong><code>0 2px 4px · hover tarjetas</code></div>
+      <div class="elev media"><strong>Media</strong><code>0 4px 12px · modal, popover</code></div>
+      <div class="elev alta"><strong>Alta</strong><code>0 8px 24px · flotantes</code></div>
+    </div>
+    <div class="demo-panel" style="margin-top:24px">
+      <h3>Demostración del velo de modal (negro 0.5)</h3>
+      <div class="btn-row"><button class="btn-primary" id="openModal" type="button">Abrir modal</button></div>
+    </div>
+  </section>
+
+  <!-- FORMAS -->
+  <section class="block" id="formas" aria-labelledby="t-shape">
+    <p class="kicker">06 · Shapes</p>
+    <h2 id="t-shape">Radios y formas</h2>
+    <p style="max-width:70ch">Recto por defecto (0px): estética nítida. Círculo perfecto para iconos, avatar y badges.</p>
+    <div class="shape-grid">
+      <div class="shape light r-none">none · 0px</div>
+      <div class="shape light r-sm">sm · 8px</div>
+      <div class="shape light r-md">md · 16px</div>
+      <div class="shape r-pill">pill · 50px</div>
+      <div><div class="shape r-full">full</div><p class="spec-mono" style="text-align:center">9999px (=50%)</p></div>
+    </div>
+  </section>
+
+  <!-- COMPONENTES -->
+  <section class="block" id="componentes" aria-labelledby="t-comp">
+    <p class="kicker">07 · Components</p>
+    <h2 id="t-comp">Componentes</h2>
+
+    <div class="demo-panel">
+      <h3>Botones</h3>
+      <div class="btn-row">
+        <button class="btn-primary" type="button">Acción principal</button>
+        <button class="btn-primary" type="button" disabled>Deshabilitado</button>
+        <button class="btn-icon" type="button" aria-label="Acción secundaria">★</button>
+        <button class="btn-ghost" type="button">Botón fantasma</button>
+      </div>
+      <p class="type-meta">Primario: fondo {colors.primary}, píldora 50px, padding 12×24 · Icono: 32px circular · Fantasma: azul, hover naranja + subrayado</p>
+    </div>
+
+    <div class="demo-panel">
+      <h3>Navegación y enlaces</h3>
+      <p><a class="link-menu" href="#componentes">Inicio</a> &nbsp;·&nbsp; <a class="link-menu active" href="#componentes" aria-current="page">Cursos</a> &nbsp;·&nbsp; <a class="link-menu" href="#componentes">Blog</a></p>
+      <p>Enlace en texto: <a class="link-inline" href="#componentes">ver el programa completo</a> (hover naranja con subrayado).</p>
+      <p><a class="link-title spec-h2" href="#componentes" style="font-size:28px">Título-enlace en Raleway Black</a></p>
+    </div>
+
+    <div class="demo-panel">
+      <h3>Campos y formularios</h3>
+      <form onsubmit="return false" aria-label="Formulario de ejemplo">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Correo</label>
+          <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email">
+        </div>
+        <button class="btn-primary" type="submit">Enviar</button>
+      </form>
+      <p class="type-meta">Fondo blanco · borde 2px {colors.surface-muted} · focus: borde {colors.primary} + halo 20%</p>
+    </div>
+
+    <div class="demo-panel">
+      <h3>Tarjetas</h3>
+      <div class="card" style="margin-bottom:24px">Tarjeta de contenido: fondo {colors.surface}, esquinas rectas, padding 12px. Al pasar el cursor gana sombra sutil.</div>
+      <div class="btn-row" style="align-items:stretch">
+        <article class="course-card">
+          <div class="cc-icon" aria-hidden="true">▶</div>
+          <h4>Curso de JavaScript</h4>
+          <a class="link-inline" href="#componentes">Ver →</a>
+        </article>
+        <article class="skill-card"><span class="dot" aria-hidden="true">◆</span><span>HTML semántico y accesible</span></article>
+      </div>
+      <article class="edu-card" style="margin-top:24px">
+        <div class="edu-top"><span>Licenciatura en Sistemas</span><time datetime="2020">2020 · mono</time></div>
+        <p class="spec-body" style="margin:8px 0 0">Tarjeta con acento lateral naranja de 4px y fecha monoespaciada en gris.</p>
+      </article>
+      <p style="margin-top:24px"><a class="contact-btn" href="#componentes"><span class="ci" aria-hidden="true">✉</span> hola@ejemplo.com</a></p>
+    </div>
+
+    <div class="demo-panel">
+      <h3>Sociales, chips y avatar</h3>
+      <div class="social-row" role="group" aria-label="Redes sociales">
+        <a class="social-btn" href="#componentes" aria-label="X">𝕏</a>
+        <a class="social-btn" href="#componentes" aria-label="YouTube">▶</a>
+        <a class="social-btn" href="#componentes" aria-label="GitHub">●</a>
+      </div>
+      <p style="margin-top:16px"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Accesibilidad</span></p>
+      <div class="avatar-row">
+        <img class="avatar" src="assets/img/jonmircha.jpg" alt="Foto de perfil de jonmircha" width="200" height="200" loading="lazy">
+        <p class="type-meta">Avatar circular · 200px (160px en móvil) · borde 4px gris claro</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGLAS -->
+  <section class="block" id="reglas" aria-labelledby="t-rules">
+    <p class="kicker">08 · Do's and Don'ts</p>
+    <h2 id="t-rules">Lo que sí y lo que no</h2>
+    <div class="do-grid">
+      <div class="do-card do">
+        <h3>✓ Sí</h3>
+        <ul>
+          <li>Naranja para todos los CTA primarios.</li>
+          <li>Cuerpo a 20px en escritorio, nunca bajo 16px.</li>
+          <li>48–92px vertical entre secciones mayores.</li>
+          <li>PT Sans para cuerpo; Raleway Black solo titulares top.</li>
+          <li>Iconos sociales circulares para acciones secundarias.</li>
+          <li>Tarjetas a 0px: apariencia nítida.</li>
+          <li>Hover con color o subrayado, nunca solo opacidad.</li>
+        </ul>
+      </div>
+      <div class="do-card dont">
+        <h3>✕ No</h3>
+        <ul>
+          <li>Naranja y azul juntos en el mismo interactivo.</li>
+          <li>Sombras más profundas que 0 8px 24px.</li>
+          <li>Grises más claros que #808080 para texto.</li>
+          <li>Serif en la jerarquía principal.</li>
+          <li>Botones menores a 32px circulares o 40px de alto.</li>
+          <li>Ocultar navegación crítica en móvil sin necesidad.</li>
+          <li>Fondos con textura que compitan con la legibilidad.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>jonmircha · Sistema de diseño · tokens de <code>DESIGN.md</code> · HTML/CSS/JS vanilla</span>
+    <a class="link-inline" href="#top">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<div class="modal-veil" id="modalVeil">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle" class="spec-h3">Modal de ejemplo</h2>
+    <p class="spec-body">Elevación media + velo negro al 0.5, según el sistema.</p>
+    <div class="btn-row"><button class="btn-primary" id="closeModal" type="button">Cerrar</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  /* Menú móvil */
+  var toggle=document.getElementById("navToggle"),
+      links=document.getElementById("navLinks");
+  toggle.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+    toggle.setAttribute("aria-label",open?"Cerrar menú":"Abrir menú");
+  });
+  links.addEventListener("click",function(e){
+    if(e.target.tagName==="A"&&links.classList.contains("open")){
+      links.classList.remove("open");
+      toggle.setAttribute("aria-expanded","false");
+    }
+  });
+  /* Copiar hex */
+  var toast=document.getElementById("toast"),timer=null;
+  function showToast(msg){
+    toast.textContent=msg;
+    toast.classList.add("show");
+    clearTimeout(timer);
+    timer=setTimeout(function(){toast.classList.remove("show");},1800);
+  }
+  document.getElementById("swatches").addEventListener("click",function(e){
+    var btn=e.target.closest(".swatch");
+    if(!btn)return;
+    var hex=btn.getAttribute("data-hex");
+    function done(){showToast(hex+" copiado");btn.querySelector(".copy-hint").textContent="¡copiado!";setTimeout(function(){btn.querySelector(".copy-hint").textContent="clic para copiar";},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(hex).then(done,function(){showToast(hex);});
+    }else{
+      var t=document.createElement("textarea");
+      t.value=hex;document.body.appendChild(t);t.select();
+      try{document.execCommand("copy");done();}catch(err){showToast(hex);}
+      document.body.removeChild(t);
+    }
+  });
+  /* Modal */
+  var veil=document.getElementById("modalVeil"),
+      openBtn=document.getElementById("openModal"),
+      closeBtn=document.getElementById("closeModal"),
+      lastFocus=null;
+  function openModal(){
+    lastFocus=document.activeElement;
+    veil.classList.add("open");
+    closeBtn.focus();
+    document.addEventListener("keydown",onKey);
+  }
+  function closeModal(){
+    veil.classList.remove("open");
+    document.removeEventListener("keydown",onKey);
+    if(lastFocus)lastFocus.focus();
+  }
+  function onKey(e){if(e.key==="Escape")closeModal();}
+  openBtn.addEventListener("click",openModal);
+  closeBtn.addEventListener("click",closeModal);
+  veil.addEventListener("click",function(e){if(e.target===veil)closeModal();});
+})();
+</script>
+</body>
+</html>

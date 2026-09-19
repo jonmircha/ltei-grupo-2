@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan MirCha · jonmircha — UX &amp; Software Engineer</title>
+<meta name="description" content="CV de Jonathan MirCha (jonmircha): UX & Software Engineer, profesor y edutuber. Educación, experiencia, habilidades, cursos y contacto.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<style>
+/* ===== TOKENS derivados de DESIGN.md (única fuente de verdad) ===== */
+:root{
+  --color-primary:#C7431F;
+  --color-primary-alt:#E7562E;
+  --color-primary-variant:#E7762E;
+  --color-primary-hover:#A93A14;
+  --color-primary-pressed:#9C3612;
+  --color-link:#0088CC;
+  --color-ink:#202225;
+  --color-muted:#808080;
+  --color-surface:#FCFCFC;
+  --color-surface-muted:#EEEEEE;
+  --color-disabled:#CCCCCC;
+  --color-white:#FFFFFF;
+  --shadow-subtle:0 2px 4px rgba(32,34,37,.08);
+  --shadow-medium:0 4px 12px rgba(32,34,37,.12);
+  --font-body:"PT Sans","Segoe UI",Arial,sans-serif;
+  --font-display:"Raleway Black","Raleway","Segoe UI",Arial,sans-serif;
+  --font-accent:"Raleway","Segoe UI",Arial,sans-serif;
+  --font-mono:"Roboto Mono",ui-monospace,Menlo,monospace;
+  --space-micro:4px; --space-xs:8px; --space-sm:12px; --space-md:16px;
+  --space-lg:24px; --space-xl:32px; --space-3xl:48px; --space-4xl:92px;
+  --radius-none:0px; --radius-pill:50px; --radius-full:9999px;
+  --max-width:1440px;
+}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway Black";src:url("assets/fonts/raleway-black.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-black.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto Mono";src:url("assets/fonts/roboto-mono-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+/* ===== BASE ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-surface);color:var(--color-ink);
+  font-family:var(--font-body);font-size:20px;line-height:30px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0 0 var(--space-md);line-height:1.2}
+p{margin:0 0 var(--space-md)}
+a{color:var(--color-link)}
+a:hover{color:var(--color-primary)}
+:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
+.skip-link{position:absolute;left:var(--space-md);top:-100px;z-index:200;background:var(--color-ink);color:var(--color-white);padding:var(--space-sm) var(--space-md);text-decoration:none;transition:top .2s}
+.skip-link:focus{top:var(--space-sm)}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-3xl)}
+section.block{padding:var(--space-4xl) 0;border-bottom:1px solid var(--color-surface-muted);scroll-margin-top:64px}
+.kicker{font-family:var(--font-mono);font-size:14px;line-height:20px;color:var(--color-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)}
+.block h2{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* ===== NAV (token navbar: 64px, transparente) ===== */
+.site-nav{position:sticky;top:0;z-index:100;min-height:64px;border-bottom:1px solid var(--color-surface-muted);background:color-mix(in srgb,var(--color-surface) 92%,transparent)}
+.site-nav .wrap{display:flex;align-items:center;gap:var(--space-lg);min-height:64px}
+.brand{display:flex;align-items:center;gap:var(--space-sm);text-decoration:none;color:var(--color-ink);font-family:var(--font-accent);font-weight:700;font-size:20px}
+.brand img{width:32px;height:32px;display:block}
+.nav-links{display:flex;gap:var(--space-lg);list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{font-family:var(--font-body);font-size:20px;color:var(--color-ink);text-decoration:none;padding:var(--space-xs) 2px}
+.nav-links a:hover{color:var(--color-primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.nav-links a.active{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.nav-toggle{display:none;margin-left:auto;background:var(--color-surface-muted);border:0;border-radius:var(--radius-full);width:44px;height:44px;font-size:22px;cursor:pointer;color:var(--color-ink)}
+@media(max-width:899px){
+  .nav-toggle{display:block}
+  .nav-links{display:none;flex-direction:column;background:var(--color-white);border:1px solid var(--color-surface-muted);position:absolute;top:64px;right:var(--space-sm);left:var(--space-sm);padding:var(--space-sm)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:var(--space-sm) var(--space-md)}
+}
+/* ===== HERO (token: 48px horiz / 92px vert) ===== */
+.hero{padding:var(--space-4xl) 0;border-bottom:1px solid var(--color-surface-muted)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-3xl);align-items:center}
+.hero-hello{font-family:var(--font-accent);font-size:20px;margin-bottom:var(--space-sm)}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:40px;line-height:48px;margin-bottom:var(--space-sm)}
+.hero h1 .accent{color:var(--color-primary)}
+.hero-role{font-family:var(--font-accent);font-weight:700;font-size:19.216px;line-height:24px;margin-bottom:var(--space-md)}
+.hero-value{max-width:55ch}
+.hero-photo{display:flex;justify-content:center}
+.avatar{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-full);border:4px solid var(--color-surface-muted)}
+.btn-row{display:flex;gap:var(--space-md);flex-wrap:wrap;align-items:center;margin:var(--space-lg) 0}
+.btn-primary{display:inline-block;background:var(--color-primary);color:var(--color-white);font-family:var(--font-accent);font-weight:700;font-size:19.216px;line-height:24px;border-radius:var(--radius-pill);padding:12px 24px;border:0;cursor:pointer;text-decoration:none;min-height:44px;transition:background .15s}
+.btn-primary:hover{background:var(--color-primary-hover);color:var(--color-white)}
+.btn-primary:active{background:var(--color-primary-pressed)}
+.btn-ghost{display:inline-block;background:transparent;color:var(--color-link);font-family:var(--font-body);font-size:20px;padding:12px 8px;text-decoration:none;min-height:44px}
+.btn-ghost:hover{color:var(--color-primary);text-decoration:underline}
+.social-row{display:flex;gap:var(--space-sm);flex-wrap:wrap}
+.social-btn{background:var(--color-surface-muted);color:var(--color-ink);border:0;border-radius:var(--radius-full);width:44px;height:44px;cursor:pointer;font-size:18px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.social-btn:hover{background:var(--color-primary);color:var(--color-white)}
+@media(max-width:899px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .hero-photo{order:-1}
+  .hero .btn-row,.hero .social-row{justify-content:center}
+  .avatar{width:160px;height:160px}
+}
+/* ===== TARJETAS / CHIPS / LISTAS ===== */
+.edu-card{background:var(--color-white);border:1px solid var(--color-surface-muted);border-left:4px solid var(--color-primary);border-radius:var(--radius-none);padding:var(--space-md) var(--space-lg);margin-bottom:var(--space-md);max-width:860px}
+.edu-top{display:flex;justify-content:space-between;gap:var(--space-md);flex-wrap:wrap;font-weight:700}
+.edu-top time{font-family:var(--font-mono);font-weight:400;font-size:14px;line-height:20px;color:var(--color-muted)}
+.chip{display:inline-block;background:var(--color-surface-muted);color:var(--color-ink);font-family:var(--font-accent);font-size:13px;line-height:16px;border-radius:var(--radius-full);padding:6px 14px;margin:0 6px 6px 0}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-md);list-style:none;margin:var(--space-lg) 0 0;padding:0}
+.skill-card{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-sm) var(--space-md);display:flex;gap:var(--space-sm);align-items:flex-start}
+.skill-card .tick{color:var(--color-primary);font-weight:700}
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md);margin-top:var(--space-lg)}
+.course-card{background:var(--color-white);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-lg);display:flex;flex-direction:column;gap:var(--space-sm)}
+.course-card:hover{border-color:var(--color-primary);box-shadow:var(--shadow-subtle)}
+.course-card .cc-icon{font-size:32px}
+.course-card h3{font-family:var(--font-accent);font-weight:700;font-size:19px;margin:0}
+.contact-grid{display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-top:var(--space-lg)}
+.contact-btn{display:inline-flex;align-items:center;gap:var(--space-sm);background:var(--color-white);color:var(--color-ink);border:1px solid var(--color-surface-muted);border-radius:var(--radius-none);padding:var(--space-sm) var(--space-md);text-decoration:none;font-size:18px;min-height:44px}
+.contact-btn .ci{color:var(--color-primary)}
+.contact-btn:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.subblock{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px;text-transform:uppercase;letter-spacing:.06em;margin:var(--space-xl) 0 var(--space-md)}
+.subblock:first-of-type{margin-top:var(--space-lg)}
+.fine{font-family:var(--font-accent);font-size:16px;line-height:24px;max-width:80ch}
+/* ===== FOOTER (pie oscuro: fondo ink, texto blanco) ===== */
+.site-footer{background:var(--color-ink);color:var(--color-white);padding:var(--space-3xl) 0 var(--space-xl)}
+.site-footer .wrap{display:flex;flex-direction:column;gap:var(--space-md);align-items:center;text-align:center}
+.site-footer .social-btn{background:rgba(255,255,255,.12);color:var(--color-white)}
+.site-footer .social-btn:hover{background:var(--color-primary);color:var(--color-white)}
+.site-footer p{margin:0}
+.site-footer .motto{font-family:var(--font-accent)}
+@media(max-width:1023px){body{font-size:18px}.wrap{padding:0 var(--space-3xl)}section.block{padding:var(--space-3xl) 0}.block h2{font-size:32px;line-height:40px}}
+@media(max-width:599px){.wrap{padding:0 var(--space-sm)}section.block{padding:var(--space-lg) 0}.block h2{font-size:28px;line-height:36px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<nav class="site-nav" aria-label="Navegación principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="jonmircha — inicio">
+      <img src="assets/img/isotipo.svg" alt="Isotipo del búho jonmircha" width="32" height="32">
+      <span>jonmircha</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hola">Hola</a></li>
+      <li><a href="#educacion">Educación</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#cursos">Cursos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <p class="hero-hello">Hola, soy tu amigo y docente digital…</p>
+      <h1>Jonathan <span class="accent">MirCha</span></h1>
+      <p class="hero-role">UX &amp; Software Engineer · Profesor &amp; Edutuber</p>
+      <p class="hero-value">Enseño a programar y creo en código minimalista y resistente, que funciona por años sin depender de frameworks que caducan. Soy desarrollador independiente y profesor universitario.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="#contacto">Contáctame</a>
+        <a class="btn-ghost" href="https://www.youtube.com/jonmircha" target="_blank" rel="noopener">Mis cursos</a>
+      </div>
+      <div class="social-row" role="group" aria-label="Redes sociales">
+        <a class="social-btn" href="https://www.youtube.com/jonmircha" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+        <a class="social-btn" href="https://www.linkedin.com/in/jonmircha/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a class="social-btn" href="https://github.com/jonmircha" target="_blank" rel="noopener" aria-label="GitHub">●</a>
+        <a class="social-btn" href="https://www.figma.com/@jonmircha" target="_blank" rel="noopener" aria-label="Figma">F</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img class="avatar" src="assets/img/jonmircha.jpg" alt="Foto de perfil de Jonathan MirCha" width="200" height="200">
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="wrap">
+
+  <section class="block" id="hola" aria-labelledby="t-hola">
+    <p class="kicker">Sobre mí</p>
+    <h2 id="t-hola">Hola</h2>
+    <p>Soy <strong>Jonathan Ulises Miranda Charles (jonmircha)</strong>, nací en la CDMX en 1984 y aquí vivo; desde 2004 trabajo en educación y desarrollo web.</p>
+    <p>Como desarrollador freelance estoy más orientado al <strong>frontend</strong> aunque también hago backend; disfruto la maquetación, la interactividad de interfaces y la optimización de carga.</p>
+    <p>Desde 2012 creo contenido de valor en YouTube, con la filosofía de <strong>“trabajo contigo”</strong> en vez de “trabajo para ti”.</p>
+    <p>Toque personal: me gustan los perros, el anime y el manga, y hacer ejercicio.</p>
+  </section>
+
+  <section class="block" id="educacion" aria-labelledby="t-edu">
+    <p class="kicker">Formación</p>
+    <h2 id="t-edu">Educación</h2>
+    <article class="edu-card"><div class="edu-top"><span><span aria-hidden="true">🎓 </span>Eterno autodidacta de Internet</span><time>continuo</time></div></article>
+    <article class="edu-card"><div class="edu-top"><span><span aria-hidden="true">🎓 </span>Maestría en Comunicación con Medios Virtuales — ICONOS</span><time>2017</time></div><p class="fine">Cédula 11009760.</p></article>
+    <article class="edu-card"><div class="edu-top"><span><span aria-hidden="true">🎓 </span>Ingeniería en Sistemas — UVM</span><time>2008</time></div><p class="fine">Cédula 5659365.</p></article>
+  </section>
+
+  <section class="block" id="experiencia" aria-labelledby="t-exp">
+    <p class="kicker">Trayectoria</p>
+    <h2 id="t-exp">Experiencia</h2>
+
+    <h3 class="subblock">💻 Como Desarrollador Web &amp; UX/UI</h3>
+    <article class="edu-card">
+      <div class="edu-top"><span>jonmircha.com — Desarrollador / Diseñador / Consultor</span><time>2004 — actualidad</time></div>
+      <p class="fine">He desarrollado sitios y aplicaciones web para empresas, instituciones y figuras públicas, además de consultoría y mentoría.</p>
+      <p style="margin-bottom:0"><span class="chip">SIEMENS</span><span class="chip">COSTCO</span><span class="chip">Aeroméxico</span><span class="chip">Herman Miller</span><span class="chip">Gran Chapur</span><span class="chip">Cloe Moda</span><span class="chip">Lucy Lara</span><span class="chip">Muebilia</span><span class="chip">SOLCOM</span><span class="chip">Malvestida</span><span class="chip">Condé Nast</span><span class="chip">Gamol</span><span class="chip">Voit</span><span class="chip">MVS</span></p>
+    </article>
+
+    <h3 class="subblock">🎬 Como Creador de Contenidos</h3>
+    <article class="edu-card">
+      <div class="edu-top"><span>YouTube — EduTuber</span><time>2012 — actualidad</time></div>
+      <p class="fine">Contenido sobre diseño UX/UI, desarrollo web e IA para casi 200 000 suscriptores en <a href="https://www.youtube.com/jonmircha" target="_blank" rel="noopener">mi canal</a>, con patrocinios y menciones.</p>
+      <p style="margin-bottom:0"><span class="chip">Hostinger</span><span class="chip">Wondershare</span><span class="chip">SquareX</span><span class="chip">Arc.dev</span><span class="chip">Turing</span><span class="chip">UBITS</span><span class="chip">Crehana</span></p>
+    </article>
+
+    <h3 class="subblock">🏫 Como Docente</h3>
+    <article class="edu-card"><div class="edu-top"><span>Universidad AMERIKE — Docente de Asignatura</span><time>2022 — actualidad</time></div></article>
+    <article class="edu-card"><div class="edu-top"><span>Universidad La Salle — Docente de Asignatura</span><time>2020 — actualidad</time></div></article>
+    <article class="edu-card"><div class="edu-top"><span>ICONOS — Docente Universitario y de Posgrados</span><time>2011–2020</time></div></article>
+    <p class="fine">Otras instituciones donde he impartido cátedra: USB, CENTRO, UNIVDEP, UVM, MacTrainee y ADM. Plataformas en línea: Escuela IT, TEKDI, EDteam y Bextlán.</p>
+  </section>
+
+  <section class="block" id="habilidades" aria-labelledby="t-hab">
+    <p class="kicker">Capacidades</p>
+    <h2 id="t-hab">Habilidades</h2>
+    <ul class="skill-grid">
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Diseño UX/UI, maquetado web, SEO y WPO.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Desarrollo web full stack: frontend, backend y bases de datos.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Creación de contenidos y social media.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Manejo de herramientas de inteligencia artificial.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Consultoría y mentoría profesional.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Comunicación efectiva, liderazgo educativo, creatividad y empatía digital.</span></li>
+      <li class="skill-card"><span class="tick" aria-hidden="true">✔</span><span>Inglés: intermedio (lectura técnica fluida).</span></li>
+    </ul>
+  </section>
+
+  <section class="block" id="cursos" aria-labelledby="t-cur">
+    <p class="kicker">Playlists</p>
+    <h2 id="t-cur">Cursos</h2>
+    <p class="fine">Mis listas más populares de YouTube.</p>
+    <div class="course-grid">
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Básicos de la Web</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUZ7FtDshwPGlZoLSWyR5ryt" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>JavaScript</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Node.js</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUY3gY-ptuqkNEXZHsNwlkND" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>React</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUZ5XcUw8fJPTBKEHEKPMTKk" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>PHP</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUb2n_YcwsG47RFv69A63hME" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Bases de Datos</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUbxupWtqWZI-agsR-b3S9_5" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Diseño UX/UI</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUYzH3wNAN3wz_kM69CZWcuP" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Figma</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUbpfewvbKLhHctdkgadAy-K" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>Inteligencia Artificial</h3><a href="https://www.youtube.com/playlist?list=PLvq-jIkSeTUYu5mVCA9JJ4tnCuafykp5O" target="_blank" rel="noopener">Ver playlist →</a></article>
+      <article class="course-card"><div class="cc-icon" aria-hidden="true">▶</div><h3>NotiWeb</h3><a href="https://www.youtube.com/playlist?list=PLEEyykWTzB2Q" target="_blank" rel="noopener">Ver playlist →</a></article>
+    </div>
+  </section>
+
+  <section class="block" id="contacto" aria-labelledby="t-con">
+    <p class="kicker">Hablemos</p>
+    <h2 id="t-con">Contacto</h2>
+    <div class="contact-grid">
+      <a class="contact-btn" href="mailto:hola@jonmircha.com"><span class="ci" aria-hidden="true">✉</span> hola@jonmircha.com</a>
+      <a class="contact-btn" href="tel:+525518388261"><span class="ci" aria-hidden="true">☎</span> +52 55 1838 8261</a>
+      <a class="contact-btn" href="https://jonmircha.com" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">⌂</span> jonmircha.com</a>
+      <a class="contact-btn" href="https://www.youtube.com/jonmircha" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">▶</span> YouTube</a>
+      <a class="contact-btn" href="https://www.linkedin.com/in/jonmircha/" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">in</span> LinkedIn</a>
+      <a class="contact-btn" href="https://github.com/jonmircha" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">●</span> GitHub</a>
+      <a class="contact-btn" href="https://www.figma.com/@jonmircha" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">F</span> Figma</a>
+      <a class="contact-btn" href="https://jonmircha.ipzmarketing.com/f/B8qqiXuYYzo" target="_blank" rel="noopener"><span class="ci" aria-hidden="true">✉</span> Newsletter</a>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Jonathan MirCha · jonmircha</strong></p>
+    <p class="motto">Sean felices hasta siempre</p>
+    <div class="social-row" role="group" aria-label="Redes sociales">
+      <a class="social-btn" href="mailto:hola@jonmircha.com" aria-label="Correo">✉</a>
+      <a class="social-btn" href="https://www.youtube.com/jonmircha" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+      <a class="social-btn" href="https://www.linkedin.com/in/jonmircha/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="social-btn" href="https://github.com/jonmircha" target="_blank" rel="noopener" aria-label="GitHub">●</a>
+      <a class="social-btn" href="https://www.figma.com/@jonmircha" target="_blank" rel="noopener" aria-label="Figma">F</a>
+    </div>
+    <p class="fine" style="color:var(--color-white)">© <span id="year">2026</span> jonmircha</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var toggle=document.getElementById("navToggle"),
+      links=document.getElementById("navLinks");
+  toggle.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+    toggle.setAttribute("aria-label",open?"Cerrar menú":"Abrir menú");
+  });
+  links.addEventListener("click",function(e){
+    if(e.target.tagName==="A"&&links.classList.contains("open")){
+      links.classList.remove("open");
+      toggle.setAttribute("aria-expanded","false");
+      toggle.setAttribute("aria-label","Abrir menú");
+    }
+  });
+  /* Resaltado de sección activa */
+  var map={};
+  links.querySelectorAll("a").forEach(function(a){map[a.getAttribute("href").slice(1)]=a;});
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.querySelectorAll("a").forEach(function(a){a.classList.remove("active");a.removeAttribute("aria-current");});
+          var a=map[en.target.id];
+          if(a){a.classList.add("active");a.setAttribute("aria-current","true");}
+        }
+      });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    ["hola","educacion","experiencia","habilidades","cursos","contacto"].forEach(function(id){
+      var s=document.getElementById(id);if(s)obs.observe(s);
+    });
+  }
+  document.getElementById("year").textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
